@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GiftDrop — gifts that feel like gifts</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;1,500&family=Fraunces:ital,wght@0,400;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1e7;--ink:#23211d;--mut:#8a8173;--acc:#7a5c2e;--line:#e3dac8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif}
+button,input,textarea,select{font:inherit;color:inherit}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:20px 5vw}
+.logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;cursor:pointer;letter-spacing:.02em}.logo i{color:var(--acc)}
+.btn{border:1px solid var(--ink);background:transparent;padding:11px 22px;border-radius:99px;cursor:pointer;transition:.25s}
+.btn:hover{background:var(--ink);color:var(--bg)}.btn.p{background:var(--ink);color:var(--bg)}.btn.p:hover{opacity:.85}
+.btn.s{padding:7px 14px;font-size:13px}.btn.g{border-color:var(--line)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 5vw 60px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:5vw;align-items:center;padding:3vw 0}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,7vw,84px);line-height:.98;margin:0 0 22px}.hero h1 em{color:var(--acc)}
+.hero p{color:var(--mut);max-width:420px;line-height:1.7;margin:0 0 28px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:50px;border-top:1px solid var(--line);padding-top:30px}.feat b{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;display:block;margin-bottom:6px}.feat span{color:var(--mut);font-size:14px;line-height:1.6}
+.phone{width:100%;max-width:340px;height:640px;margin:0 auto;border-radius:38px;border:8px solid #1b1a18;overflow:hidden;box-shadow:0 30px 60px -20px rgba(40,30,10,.4);position:relative;background:#000}
+.auth{max-width:380px;margin:6vh auto;padding:0 20px}.auth h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:44px;margin:0 0 20px}
+.f{display:block;margin-bottom:14px;font-size:12px;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+.f input,.f textarea,.f select{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fffdf8;font-size:15px;text-transform:none;letter-spacing:0}
+.f textarea{min-height:80px;resize:vertical}
+.dh{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:12px;margin:10px 0 28px}.dh h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:46px;margin:0}
+.badge{font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--acc);color:var(--acc);padding:3px 10px;border-radius:99px}
+.gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.gc{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fffdf8}.gc .sw{height:90px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.gc .in{padding:16px}.gc h3{font-family:'Cormorant Garamond',serif;font-size:24px;margin:0 0 4px;font-weight:600}.gc small{color:var(--mut)}.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.empty{border:1px dashed var(--line);border-radius:18px;padding:50px;text-align:center;color:var(--mut)}
+.ed{display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start}
+.steps{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap}.steps button{border:0;background:none;padding:6px 0;margin-right:12px;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent}.steps .on{color:var(--ink);border-color:var(--acc)}
+.ed h3{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:400;margin:0 0 18px}
+.og{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.o{border:1px solid var(--line);background:#fffdf8;border-radius:16px;padding:18px 10px;cursor:pointer;text-align:center;transition:.2s}.o:hover{transform:translateY(-2px)}.o.on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}.o span{display:block;font-size:28px;margin-bottom:6px}.o i{display:block;height:46px;border-radius:8px;margin-bottom:8px}.o small{color:var(--mut)}
+.th{display:flex;gap:6px;margin-bottom:8px}.th b{width:18px;height:18px;border-radius:50%}
+.nav{display:flex;justify-content:space-between;margin-top:26px}
+.ph{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0 16px}.ph div{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden}.ph img{width:100%;height:100%;object-fit:cover}.ph button{position:absolute;top:3px;right:3px;border:0;background:#000a;color:#fff;border-radius:50%;width:22px;height:22px;cursor:pointer}
+.up{display:inline-block;border:1px dashed var(--mut);border-radius:12px;padding:12px 18px;cursor:pointer;font-size:14px;margin-bottom:14px}.up input{display:none}
+.link{display:flex;gap:8px;border:1px solid var(--line);padding:10px;border-radius:12px;background:#fffdf8;word-break:break-all;font-size:13px;align-items:center}
+.pv{position:sticky;top:20px}.pvb{text-align:center;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 22px;border-radius:99px;z-index:99;font-size:14px;animation:up .4s}
+/* GIFT VIEW */html,body{scrollbar-width:none}body::-webkit-scrollbar{display:none}.gv *::-webkit-scrollbar{display:none}.gv *{scrollbar-width:none}.gv::-webkit-scrollbar,.phone ::-webkit-scrollbar{display:none;width:0;height:0}.phone *{scrollbar-width:none}
+.gv{scrollbar-width:none;-ms-overflow-style:none;height:100%;overflow-y:auto;overflow-x:hidden;background:var(--bg);color:var(--ink);position:relative;font-family:'DM Sans',sans-serif;scroll-behavior:smooth}
+.gv.full{height:100dvh}.gv h1,.gv h2,.gv .hf{font-family:var(--hf),serif;font-weight:400}
+.cover{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;cursor:pointer;background:radial-gradient(circle at 50% 35%,var(--bg2),var(--bg) 70%)}.gv.full .cover{min-height:100dvh}
+.cover small{letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--acc)}.cover h2{font-size:38px;margin:10px 0 40px}
+.box{width:130px;height:110px;background:var(--acc);border-radius:6px;position:relative;animation:float 3s ease-in-out infinite;box-shadow:0 25px 40px -15px #0006}
+.box:before{content:'';position:absolute;left:-8px;right:-8px;top:-24px;height:34px;background:var(--acc);border-radius:6px;filter:brightness(1.12);box-shadow:0 6px 0 #0002;transition:.7s}
+.box:after{content:'';position:absolute;left:50%;width:18px;margin-left:-9px;top:-24px;bottom:0;background:var(--bg);opacity:.85}
+.cover:hover .box:before{transform:translateY(-10px) rotate(-4deg)}
+.tap{margin-top:46px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.7;animation:pulse 2s infinite}
+.sec{padding:60px 26px;text-align:center;animation:rise 1s both}
+.hero2{min-height:88%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 26px;text-align:center;background:linear-gradient(var(--bg2),var(--bg))}.gv.full .hero2{min-height:100dvh}
+.hero2 .g{font-size:44px;animation:float 3s infinite}.hero2 small{letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--acc);margin:14px 0}
+.hero2 h1{font-size:clamp(44px,13vw,76px);line-height:1;margin:0 0 20px;animation:rise 1.4s .3s both}.hero2 p{font-style:italic;font-size:19px;opacity:.75;margin:0;animation:rise 1.4s .7s both}
+.hero2 .sc{margin-top:40px;font-size:11px;letter-spacing:.2em;opacity:.5;animation:pulse 2s infinite}
+.card{max-width:440px;margin:0 auto 22px;border:1px solid color-mix(in srgb,var(--acc) 45%,transparent);border-radius:20px;padding:34px 26px;cursor:pointer;position:relative;overflow:hidden;background:color-mix(in srgb,var(--bg2) 60%,transparent)}
+.card p{font-family:var(--hf),serif;font-size:23px;line-height:1.5;margin:0;transition:filter .9s,opacity .9s;white-space:pre-wrap}.card:not(.open) p{filter:blur(10px);opacity:.4}
+.card .t{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--acc);transition:.5s}.card.open .t{opacity:0;pointer-events:none}
+.gv h2.sh{font-size:30px;margin:0 0 26px}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;margin:0 auto}.gal img{width:100%;border-radius:10px;aspect-ratio:3/4;object-fit:cover;cursor:zoom-in;transition:.4s;box-shadow:0 10px 25px -10px #0005}.gal img:nth-child(odd){transform:rotate(-1.5deg)}.gal img:nth-child(even){transform:rotate(1.5deg) translateY(18px)}.gal img:first-child:nth-last-child(odd){grid-column:span 2;aspect-ratio:4/3}
+.gal img:hover{transform:scale(1.03) rotate(0)}
+.gv video{width:100%;max-width:440px;border-radius:16px}
+.lb{position:fixed;inset:0;background:#000d;z-index:50;display:flex;align-items:center;justify-content:center}.lb img{max-width:92%;max-height:90%;border-radius:8px}
+.fin{background:linear-gradient(var(--bg),var(--bg2));min-height:60%}.fbtn{border:1px solid var(--acc);background:var(--acc);color:var(--bg);padding:16px 34px;border-radius:99px;letter-spacing:.14em;text-transform:uppercase;font-size:12px;cursor:pointer}
+.fin h2{font-size:34px;line-height:1.3;max-width:420px;margin:0 auto;animation:rise 1.2s both}
+.fn{margin-top:50px;font-size:11px;letter-spacing:.2em;opacity:.4;text-transform:uppercase}
+.mute{position:sticky;top:12px;float:right;margin:12px 12px 0 0;z-index:5;border:1px solid var(--acc);background:var(--bg);color:var(--acc);border-radius:99px;width:38px;height:38px;cursor:pointer}
+.conf{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:40}.phone .conf,.pv .conf{position:absolute}
+.conf span{position:absolute;top:-30px;font-size:22px;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--x),110vh) rotate(540deg);opacity:.9}}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-10px)}}@keyframes pulse{50%{opacity:.25}}@keyframes up{from{opacity:0;transform:translate(-50%,20px)}}
+@media(max-width:880px){.hero,.ed{grid-template-columns:1fr}.feat{grid-template-columns:1fr}.pv{position:static}.dh h2{font-size:36px}}
+</style></head><body><div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<script>
+const {useState,useEffect,useRef}=React;const h=htm.bind(React.createElement);
+const uid=()=>Math.random().toString(36).slice(2,8);
+const link=id=>location.href.split('#')[0]+'#/g/'+id;
+const T={get(){try{return localStorage.getItem('gd_token')}catch(e){return null}},set(t){try{t?localStorage.setItem('gd_token',t):localStorage.removeItem('gd_token')}catch(e){}}};
+async function api(p,o={}){const hd={};if(T.get())hd.Authorization='Bearer '+T.get();if(o.type)hd['Content-Type']=o.type;else if(o.body)hd['Content-Type']='application/json';
+const r=await fetch('/api'+p,{method:o.m||'GET',headers:hd,body:o.raw||(o.body?JSON.stringify(o.body):undefined)});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Something went wrong');return j}
+const upload=async b=>(await api('/upload',{m:'POST',raw:b,type:b.type||'application/octet-stream'})).url;
+const comp=f=>new Promise((ok,no)=>{const im=new Image();im.onload=()=>{const s=Math.min(1,1200/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);c.toBlob(b=>b?ok(b):no(new Error('Image failed')),'image/jpeg',.82)};im.onerror=()=>no(new Error('Could not read image'));im.src=URL.createObjectURL(f)});
+const OCC=[
+{id:'birthday',n:'Birthday',g:'🎂',t:'Happy Birthday',m:['Another year, and one more reason to celebrate you.','Thank you for being exactly who you are.'],f:'May this year be your most beautiful yet.'},
+{id:'anniversary',n:'Anniversary',g:'💍',t:'Happy Anniversary',m:['Every day with you is my favourite chapter.','Here is to all the years still waiting for us.'],f:'I would choose you again, every single time.'},
+{id:'friendship',n:'Friendship',g:'✿',t:'For My Friend',m:['You make ordinary days feel like adventures.','I am grateful for every laugh we have shared.'],f:'Life is better with you in it.'},
+{id:'congrats',n:'Congratulations',g:'🎉',t:'Congratulations',m:['All your hard work led to this moment.','We could not be more proud of you.'],f:'This is only the beginning. Go shine.'},
+{id:'eid',n:'Eid',g:'🌙',t:'Eid Mubarak',m:['May your home be filled with light and joy.','Wishing you peace, health and blessings today and always.'],f:'Taqabbal Allahu minna wa minkum. Eid Mubarak!'},
+{id:'thanks',n:'Thank You',g:'💐',t:'Thank You',m:['Your kindness has meant more than words can say.','I truly appreciate everything you have done.'],f:'With a full heart, thank you.'}];
+const TH=[
+{id:'noir',n:'Noir Gold',bg:'#0e0d0c',bg2:'#201b13',ink:'#f3ead8',acc:'#c9a45c',hf:'Cormorant Garamond'},
+{id:'ivory',n:'Ivory Letter',bg:'#f6f1e7',bg2:'#e9dfca',ink:'#23211d',acc:'#7a5c2e',hf:'Cormorant Garamond'},
+{id:'blush',n:'Rose Blush',bg:'#f8ece8',bg2:'#f0d3cf',ink:'#3b2326',acc:'#b4566b',hf:'Playfair Display'},
+{id:'emerald',n:'Emerald Night',bg:'#08201c',bg2:'#10372f',ink:'#eef3e6',acc:'#e0c068',hf:'Fraunces'},
+{id:'midnight',n:'Midnight Blue',bg:'#12172b',bg2:'#1f2848',ink:'#e9ecf8',acc:'#9fb4ff',hf:'Playfair Display'},
+{id:'sunrise',n:'Sunrise',bg:'#fff3e3',bg2:'#ffddb9',ink:'#3a2418',acc:'#d9642b',hf:'Fraunces'}];
+const MUS=[['none','No music'],['piano','Soft Piano'],['pad','Warm Pad'],['star','Starlight'],['upload','Upload my own']];
+const SC={piano:[261.6,329.6,392,523.3,392,329.6],pad:[196,246.9,293.7,392],star:[392,493.9,587.3,659.3,587.3,493.9,440,349.2]};
+function preset(n){const C=new(window.AudioContext||window.webkitAudioContext)(),s=SC[n]||SC.piano;let i=0;
+const play=()=>{const o=C.createOscillator(),g=C.createGain(),t=C.currentTime;o.type=n==='pad'?'triangle':'sine';o.frequency.value=s[i++%s.length]*(i%7===0?.5:1);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.12,t+.05);g.gain.exponentialRampToValueAtTime(.001,t+2.2);o.connect(g);g.connect(C.destination);o.start(t);o.stop(t+2.3)};
+play();const id=setInterval(play,n==='pad'?1400:650);return()=>{clearInterval(id);C.close()}}
+function useMusic(m,on){useEffect(()=>{if(!on||!m||m.type==='none'||!m.v)return;let stop;
+if(m.type==='upload'){const a=new Audio(m.v);a.loop=true;a.play().catch(()=>{});stop=()=>a.pause()}else stop=preset(m.v);
+return()=>stop&&stop()},[on,m&&m.type,m&&m.v])}
+const occ=id=>OCC.find(o=>o.id===id)||OCC[0],theme=id=>TH.find(t=>t.id===id)||TH[0];
+const newGift=(owner,o)=>({id:uid(),owner,occasion:o.id,theme:'ivory',to:'',from:'',title:o.t,msgs:[...o.m],photos:[],video:'',music:{type:'piano',v:'piano'},finale:o.f,status:'draft',created:Date.now()});
+
+function Burst({g}){const a=Array.from({length:44},(_,i)=>i);return h`<div className="conf">${a.map(i=>h`<span key=${i} style=${{left:Math.random()*100+'%',animationDuration:3+Math.random()*3+'s',animationDelay:Math.random()*.8+'s','--x':(Math.random()*160-80)+'px',fontSize:14+Math.random()*16}}>${g}</span>`)}</div>`}
+
+function GiftView({g,full}){
+const [open,setOpen]=useState(false),[rev,setRev]=useState({}),[fin,setFin]=useState(false),[mute,setMute]=useState(false),[lb,setLb]=useState(null);
+const t=theme(g.theme),o=occ(g.occasion);useMusic(g.music,open&&!mute);
+const sty={'--bg':t.bg,'--bg2':t.bg2,'--ink':t.ink,'--acc':t.acc,'--hf':`'${t.hf}'`};
+return h`<div className=${'gv'+(full?' full':'')} style=${sty}>
+${!open?h`<div className="cover" onClick=${()=>setOpen(true)}><small>A gift for</small><h2 className="hf">${g.to||'someone special'}</h2><div className="box"></div><div className="tap">Tap to open</div></div>`:h`<div>
+${g.music&&g.music.type!=='none'&&g.music.v?h`<button className="mute" onClick=${()=>setMute(!mute)}>${mute?'♪̸':'♪'}</button>`:null}
+<div className="hero2"><div className="g">${o.g}</div><small>${o.n}</small><h1>${g.title}</h1><p>${g.from?'with love, from '+g.from:''}</p><div className="sc">SCROLL ↓</div></div>
+<div className="sec"><h2 className="sh">A few words</h2>${g.msgs.filter(Boolean).map((m,i)=>h`<div key=${i} className=${'card'+(rev[i]?' open':'')} onClick=${()=>setRev({...rev,[i]:1})}><p>${m}</p><div className="t">Tap to reveal</div></div>`)}</div>
+${g.photos.length?h`<div className="sec"><h2 className="sh">Our moments</h2><div className="gal">${g.photos.map((p,i)=>h`<img key=${i} src=${p} onClick=${()=>setLb(p)}/>`)}</div></div>`:null}
+${g.video?h`<div className="sec"><h2 className="sh">Something to watch</h2><video src=${g.video} controls playsInline></video></div>`:null}
+<div className="sec fin">${!fin?h`<h2 className="sh">One last thing…</h2><button className="fbtn" onClick=${()=>setFin(true)}>Open your surprise</button>`:h`<h2>${g.finale}</h2><div className="hf" style=${{fontSize:44,marginTop:20}}>${o.g}</div>`}<div className="fn">Made with GiftDrop</div></div>
+${fin?h`<${Burst} g=${o.g}/>`:null}
+${lb?h`<div className="lb" onClick=${()=>setLb(null)}><img src=${lb}/></div>`:null}
+</div>`}</div>`}
+
+function Landing({nav}){const demo={...newGift('x',OCC[0]),theme:'noir',to:'Amira',from:'Sam',title:'Happy Birthday',music:{type:'none'}};
+return h`<div className="wrap"><div className="hero"><div><h1>Gifts that feel <em>unwrapped.</em></h1><p>Create a private, beautifully designed page of photos, words, music and a final surprise. Share one link. No app, no sign-up for them.</p><button className="btn p" onClick=${()=>nav('/new')}>Create a gift</button></div><div className="phone"><${GiftView} g=${demo}/></div></div>
+<div className="feat"><div><b>Six occasions</b><span>Birthday, Anniversary, Friendship, Congratulations, Eid and Thank You, each with its own tone.</span></div><div><b>Designed, not templated</b><span>Editorial typography, tap-to-reveal messages, layered photos and a finale.</span></div><div><b>A private link</b><span>Every gift gets its own unguessable URL that opens instantly on any phone.</span></div></div></div>`}
+
+function Auth({nav,setUser}){const [mode,setMode]=useState('in'),[f,setF]=useState({}),[err,setErr]=useState(''),[busy,setBusy]=useState(false);const set=k=>e=>setF({...f,[k]:e.target.value});
+const go=async()=>{setErr('');setBusy(true);try{const r=await api(mode==='up'?'/signup':'/login',{m:'POST',body:{name:f.name,email:f.email,password:f.pw}});T.set(r.token);setUser(r.user);nav('/dash')}catch(e){setErr(e.message)}setBusy(false)};
+return h`<div className="auth"><h2>${mode==='in'?'Welcome back':'Create your account'}</h2>${mode==='up'?h`<label className="f">Name<input value=${f.name||''} onChange=${set('name')}/></label>`:null}<label className="f">Email<input type="email" value=${f.email||''} onChange=${set('email')}/></label><label className="f">Password<input type="password" value=${f.pw||''} onChange=${set('pw')} onKeyDown=${e=>e.key==='Enter'&&go()}/></label>${err?h`<p style=${{color:'#b4432f',fontSize:14}}>${err}</p>`:null}<button className="btn p" disabled=${busy} onClick=${go}>${mode==='in'?'Sign in':'Sign up'}</button> <button className="btn g" onClick=${()=>{setMode(mode==='in'?'up':'in');setErr('')}}>${mode==='in'?'New here?':'Have an account?'}</button></div>`}
+
+function Dash({nav,say}){const [gs,setGs]=useState(null);
+useEffect(()=>{api('/gifts').then(setGs).catch(e=>say(e.message))},[]);
+const del=async id=>{if(!confirm('Delete this gift?'))return;try{await api('/gifts/'+id,{m:'DELETE'});setGs(gs.filter(g=>g.id!==id))}catch(e){say(e.message)}};
+const cp=async id=>{try{await navigator.clipboard.writeText(link(id));say('Link copied')}catch(e){say(link(id))}};
+return h`<div className="wrap"><div className="dh"><h2>Your gifts</h2><button className="btn p" onClick=${()=>nav('/new')}>+ New gift</button></div>
+${gs===null?h`<div className="empty">Loading…</div>`:gs.length?h`<div className="gl">${gs.map(g=>{const t=theme(g.theme);return h`<div className="gc" key=${g.id}><div className="sw" style=${{background:`linear-gradient(${t.bg2},${t.bg})`}}>${occ(g.occasion).g}</div><div className="in"><h3>${g.title}</h3><small>For ${g.to||'—'} · ${g.status==='published'?'Published':'Draft'}</small><div className="acts"><button className="btn s" onClick=${()=>nav('/edit/'+g.id)}>Edit</button>${g.status==='published'?h`<button className="btn s" onClick=${()=>nav('/g/'+g.id)}>Open</button><button className="btn s" onClick=${()=>cp(g.id)}>Copy link</button>`:null}<button className="btn s g" onClick=${()=>del(g.id)}>Delete</button></div></div></div>`})}</div>`:h`<div className="empty">No gifts yet. Create your first one.</div>`}</div>`}
+
+const MAX_PH=12;
+function Editor({id,nav,say}){
+const [g,setG]=useState(id?null:newGift('',OCC[0])),[gid,setGid]=useState(id||null),[step,setStep]=useState(0),[k,setK]=useState(0),[busy,setBusy]=useState(false);
+useEffect(()=>{if(id)api('/gifts/'+id).then(setG).catch(()=>nav('/dash'))},[]);
+if(!g)return h`<div className="wrap"><div className="empty">Loading…</div></div>`;
+const up=p=>setG(x=>({...x,...p}));
+const pick=o=>{const old=occ(g.occasion);up({occasion:o.id,title:g.title===old.t?o.t:g.title,msgs:JSON.stringify(g.msgs)===JSON.stringify(old.m)?[...o.m]:g.msgs,finale:g.finale===old.f?o.f:g.finale})};
+const save=async st=>{setBusy(true);try{const b={...g,status:st||g.status},r=gid?await api('/gifts/'+gid,{m:'PUT',body:b}):await api('/gifts',{m:'POST',body:b});setGid(r.id);setG(r);return true}catch(e){say(e.message);return false}finally{setBusy(false)}};
+const media=async fn=>{setBusy(true);try{await fn()}catch(e){say(e.message)}setBusy(false)};
+const photos=e=>{const fs=[...e.target.files];e.target.value='';if(fs.length)media(async()=>{let ps=[...g.photos];for(const f of fs){if(ps.length>=MAX_PH){say('Maximum '+MAX_PH+' photos');break}ps.push(await upload(await comp(f)))}up({photos:ps})})};
+const vid=e=>{const f=e.target.files[0];e.target.value='';if(f)media(async()=>{if(f.size>4e6)throw new Error('Video must be under 4 MB');up({video:await upload(f)})})};
+const aud=e=>{const f=e.target.files[0];e.target.value='';if(f)media(async()=>{if(f.size>4e6)throw new Error('Audio must be under 4 MB');up({music:{type:'upload',v:await upload(f),name:f.name}})})};
+const setMsg=(i,v)=>up({msgs:g.msgs.map((m,j)=>j===i?v:m)});
+const pubd=async()=>{if(!g.to.trim())return say('Add who the gift is for (step 3).');if(await save('published'))say('Published!')};
+const steps=['Occasion','Design','Words','Media','Publish'];
+const body=[
+h`<div><h3>What are we celebrating?</h3><div className="og">${OCC.map(o=>h`<div key=${o.id} className=${'o'+(g.occasion===o.id?' on':'')} onClick=${()=>pick(o)}><span>${o.g}</span>${o.n}</div>`)}</div></div>`,
+h`<div><h3>Choose a design</h3><div className="og">${TH.map(t=>h`<div key=${t.id} className=${'o'+(g.theme===t.id?' on':'')} onClick=${()=>up({theme:t.id})}><i style=${{background:`linear-gradient(135deg,${t.bg},${t.bg2})`,border:'1px solid '+t.acc}}></i>${t.n}</div>`)}</div></div>`,
+h`<div><h3>Your words</h3><label className="f">For<input value=${g.to} onChange=${e=>up({to:e.target.value})} placeholder="First name"/></label><label className="f">From<input value=${g.from} onChange=${e=>up({from:e.target.value})}/></label><label className="f">Headline<input value=${g.title} onChange=${e=>up({title:e.target.value})}/></label>
+${g.msgs.map((m,i)=>h`<label className="f" key=${i}>Message ${i+1} ${g.msgs.length>1?h`<a style=${{cursor:'pointer',float:'right'}} onClick=${()=>up({msgs:g.msgs.filter((_,j)=>j!==i)})}>remove</a>`:null}<textarea value=${m} onChange=${e=>setMsg(i,e.target.value)}></textarea></label>`)}
+${g.msgs.length<5?h`<button className="btn s g" onClick=${()=>up({msgs:[...g.msgs,'']})}>+ Add message</button>`:null}
+<label className="f" style=${{marginTop:14}}>Final surprise message<textarea value=${g.finale} onChange=${e=>up({finale:e.target.value})}></textarea></label></div>`,
+h`<div><h3>Photos, video & music</h3><div className="f">Photos (${g.photos.length}/${MAX_PH})</div><div className="ph">${g.photos.map((p,i)=>h`<div key=${i}><img src=${p}/><button onClick=${()=>up({photos:g.photos.filter((_,j)=>j!==i)})}>×</button></div>`)}</div><label className="up">${busy?'Uploading…':'+ Add photos'}<input type="file" accept="image/*" multiple disabled=${busy} onChange=${photos}/></label>
+<div className="f">Video</div>${g.video?h`<p><button className="btn s g" onClick=${()=>up({video:''})}>Remove video</button> Video added</p>`:h`<label className="up">+ Add video (up to 4 MB)<input type="file" accept="video/*" disabled=${busy} onChange=${vid}/></label>`}
+<label className="f">Background music<select value=${g.music.type==='upload'?'upload':g.music.v||'none'} onChange=${e=>{const v=e.target.value;up({music:v==='none'?{type:'none'}:v==='upload'?{type:'upload',v:g.music.type==='upload'?g.music.v:''}:{type:'preset',v}})}}>${MUS.map(([v,n])=>h`<option key=${v} value=${v}>${n}</option>`)}</select></label>
+${g.music.type==='upload'?h`<label className="up">${g.music.v?'Replace: '+(g.music.name||'audio'):'+ Choose audio file'}<input type="file" accept="audio/*" disabled=${busy} onChange=${aud}/></label>`:null}
+<p style=${{fontSize:13,color:'var(--mut)'}}>Open the preview and tap the gift to hear the music.</p></div>`,
+h`<div><h3>Preview & publish</h3><p style=${{color:'var(--mut)',lineHeight:1.6}}>Open the preview, tap through it, then publish to get your private link.</p>
+${g.status==='published'&&gid?h`<div><div className="f">Private link</div><div className="link"><span style=${{flex:1}}>${link(gid)}</span><button className="btn s" onClick=${async()=>{try{await navigator.clipboard.writeText(link(gid));say('Link copied')}catch(e){say('Copy the link manually')}}}>Copy</button></div><p style=${{fontSize:12,color:'var(--mut)'}}>Anyone with this link can open the gift. Press Publish again after edits to update it.</p><button className="btn" onClick=${()=>nav('/g/'+gid)}>Open as recipient</button> <button className="btn p" disabled=${busy} onClick=${pubd}>Update</button></div>`:h`<button className="btn p" disabled=${busy} onClick=${pubd}>Publish gift</button>`}
+<button className="btn g" style=${{marginLeft:8}} disabled=${busy} onClick=${async()=>{if(await save())say('Saved')}}>Save draft</button></div>`][step];
+return h`<div className="wrap"><div className="dh"><h2>${id?'Edit gift':'New gift'}</h2><button className="btn g" onClick=${()=>nav('/dash')}>← Dashboard</button></div>
+<div className="ed"><div><div className="steps">${steps.map((s,i)=>h`<button key=${s} className=${step===i?'on':''} onClick=${()=>setStep(i)}>${i+1}. ${s}</button>`)}</div>${body}
+<div className="nav"><button className="btn g" disabled=${step===0} onClick=${()=>setStep(step-1)}>Back</button>${step<4?h`<button className="btn p" onClick=${()=>setStep(step+1)}>Continue</button>`:null}</div></div>
+<div className="pv"><div className="phone"><${GiftView} key=${k+g.occasion} g=${g}/></div><div className="pvb"><button className="btn s g" onClick=${()=>setK(k+1)}>↺ Replay preview</button></div></div></div></div>`}
+
+function Recipient({id,nav}){const [g,setG]=useState(null);
+useEffect(()=>{api('/g/'+id).then(setG).catch(()=>setG(false))},[id]);
+if(g===null)return h`<div style=${{height:'100dvh',background:'#0e0d0c'}}></div>`;
+if(!g)return h`<div className="auth" style=${{textAlign:'center'}}><h2>Gift not found</h2><p style=${{color:'var(--mut)',lineHeight:1.6}}>This gift doesn't exist or hasn't been published yet.</p><button className="btn" onClick=${()=>nav('/')}>Go home</button></div>`;
+return h`<${GiftView} g=${g} full=${true}/>`}
+
+function App(){const [route,setRoute]=useState(location.hash.slice(1)||'/'),[user,setUser]=useState(null),[ready,setReady]=useState(!T.get()),[msg,setMsg]=useState('');
+useEffect(()=>{if(T.get())api('/me').then(r=>setUser(r.user)).catch(()=>T.set(null)).finally(()=>setReady(true))},[]);
+useEffect(()=>{const f=()=>{setRoute(location.hash.slice(1)||'/');window.scrollTo(0,0)};addEventListener('hashchange',f);return()=>removeEventListener('hashchange',f)},[]);
+const nav=p=>{location.hash=p},say=m=>{setMsg(m);setTimeout(()=>setMsg(''),2800)};
+const out=async()=>{try{await api('/logout',{m:'POST'})}catch(e){}T.set(null);setUser(null);nav('/')};
+const [,a,b]=route.split('/');let page;
+if(a==='g')return h`<${Recipient} id=${b} nav=${nav}/>`;
+if(!ready)page=null;
+else if(a==='login')page=h`<${Auth} nav=${nav} setUser=${setUser}/>`;
+else if(a==='dash'||a==='new'||a==='edit')page=!user?h`<${Auth} nav=${nav} setUser=${setUser}/>`:a==='dash'?h`<${Dash} nav=${nav} say=${say}/>`:h`<${Editor} key=${b||'new'} id=${b} nav=${nav} say=${say}/>`;
+else page=h`<${Landing} nav=${p=>nav(user?p:'/login')}/>`;
+return h`<div><div className="bar"><div className="logo" onClick=${()=>nav('/')}>Gift<i>Drop</i></div><div>${user?h`<button className="btn s g" onClick=${()=>nav('/dash')}>Dashboard</button> <button className="btn s g" onClick=${out}>Sign out</button>`:h`<button className="btn s" onClick=${()=>nav('/login')}>Sign in</button>`}</div></div>${page}${msg?h`<div className="toast">${msg}</div>`:null}</div>`}
+ReactDOM.createRoot(document.getElementById('root')).render(h`<${App}/>`);
+</script></body></html>

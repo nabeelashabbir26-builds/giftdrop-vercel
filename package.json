@@ -1,0 +1,1 @@
+{"name":"giftdrop","version":"1.0.0","private":true,"dependencies":{"@vercel/blob":">=0.23.0"},"engines":{"node":">=18"}}
